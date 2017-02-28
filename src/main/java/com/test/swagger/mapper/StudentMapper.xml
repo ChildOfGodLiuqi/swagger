@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.swagger.mapper.StudentMapper">
+	<resultMap id="BaseResultMap" type="com.test.swagger.model.Student" >
+    	<id column="id" property="id" jdbcType="INTEGER" />
+    	<result column="subject" property="subject" jdbcType="VARCHAR" />
+    	<result column="name" property="name" jdbcType="VARCHAR" />
+    	<result column="score" property="score" jdbcType="DOUBLE" />
+  		</resultMap>
+	<select id="queryAll" resultType="com.test.swagger.model.Student">
+		select * from student
+	</select>
+	<select id="queryStudentById"  resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select * from student where id = #{id}
+	</select>
+	<update id="updateStudentById" parameterType="com.test.swagger.model.Student">
+		update student set name=#{name},subject=#{subject},score=#{score}
+		where id = #{id}
+	</update>
+	
+	<delete id="deleteStudentById" parameterType="java.lang.Integer">
+		delete from student where id=#{id}
+	</delete>
+	
+	<insert id="addStudent" parameterType="com.test.swagger.model.Student">
+		insert into student(id,name,subject,score) 
+		values
+		(#{id},#{name},#{subject},#{score})
+	</insert>
+</mapper>
